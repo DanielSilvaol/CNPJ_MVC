@@ -1,0 +1,341 @@
+﻿@model List<CNPJ_MVC.ViewModels.FormEmpresasViewModel>
+<h2>Empresas</h2>
+
+<div class="page">
+    <div class="page__demo">
+        <form class="search" asp-action="Details">
+            <div class="a-field search__field" id='app'>
+                <input type="text"
+                       id="query"
+                       class="r-text-field a-field__input search__input"
+                       placeholder="Aperte Tab para inserir"
+                       autofocus
+                       maxlength="18"
+                       onkeypress='mascaraMutuario(this,cpfCnpj)'
+                       onblur='clearTimeout()'
+                       data-error="Informe um cnpj válido">
+                <input type="hidden" name="cnpj" id="cnpj" />
+                <button class="r-button search__button search__clear" type="reset">
+                    <span class="search__clear-label">Clear the search form</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.971 47.971" class="search__icon search__icon-clear">
+                        <path d="M28.228 23.986L47.092 5.122a2.998 2.998 0 0 0 0-4.242 2.998 2.998 0 0 0-4.242 0L23.986 19.744 5.121.88a2.998 2.998 0 0 0-4.242 0 2.998 2.998 0 0 0 0 4.242l18.865 18.864L.879 42.85a2.998 2.998 0 1 0 4.242 4.241l18.865-18.864L42.85 47.091c.586.586 1.354.879 2.121.879s1.535-.293 2.121-.879a2.998 2.998 0 0 0 0-4.242L28.228 23.986z" />
+                    </svg>
+                </button>
+
+                <label class="a-field__label-wrap search__hint" for="query">
+                    <span class="a-field__label">Digite um CNPJ válido. E aperte "Tab"</span>
+                </label>
+            </div>
+            <button class="r-button search__button search__submit" type="submit">
+                <span class="search__submit-label">Search</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.966 56.966" class="search__icon search__icon-search">
+                    <path d="M55.146 51.887L41.588 37.786A22.926 22.926 0 0 0 46.984 23c0-12.682-10.318-23-23-23s-23 10.318-23 23 10.318 23 23 23c4.761 0 9.298-1.436 13.177-4.162l13.661 14.208c.571.593 1.339.92 2.162.92.779 0 1.518-.297 2.079-.837a3.004 3.004 0 0 0 .083-4.242zM23.984 6c9.374 0 17 7.626 17 17s-7.626 17-17 17-17-7.626-17-17 7.626-17 17-17z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class='tagHere'></div>
+
+<div class="tabs">
+
+    <div class="tabs__sidebar">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <button class="tabs__button" data-for-tab="@i">@Model[i].nome<br />@Model[i].cnpj</button>
+        }
+    </div>
+    @for (int j = 0; j < Model.Count; j++)
+    {
+
+        <div class="tabs__content" data-tab="@j">
+
+            <div class="tabs">
+                <div class="tab-2">
+                    <label for="tab2-1">Informações</label>
+                    <input id="tab2-1" name="tabs-two+@Model[j].cnpj" type="radio" checked="checked">
+                    <div class="tab_cont">
+
+                        <h2>@Model[j].nome</h2>
+                        <h4>@Model[j].cnpj</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <div class="row">
+
+                                <div class="col-md-7">
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].atividade_principal)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].atividade_principal[0].text)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].atividades_secundarias)
+                                    </dt>
+                                    <dd>
+                                        @for (int i = 0; i < Model[j].atividades_secundarias.Count; i++)
+                                        {
+                                            @Html.DisplayFor(model => model[j].atividades_secundarias[i].text)
+                                            <br />
+                                        }
+                                    </dd>
+
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].nome)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].nome)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].fantasia)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].fantasia)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].logradouro)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].logradouro)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].complemento)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].complemento)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].municipio)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].municipio)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].cep)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].cep)
+                                    </dd>
+
+                                </div>
+
+                                <div class="col-md-5">
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].cnpj)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].cnpj)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].abertura)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].abertura)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].numero)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].numero)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].bairro)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].bairro)
+                                    </dd>
+
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].uf)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].uf)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].tipo)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].tipo)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].porte)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].porte)
+                                    </dd>
+
+                                </div>
+
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].telefone)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].telefone)
+                                    </dd>
+
+
+
+
+                                </div>
+
+                                <div class="col-md-5">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].email)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].email)
+                                    </dd>
+
+
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-md-7">
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].natureza_juridica)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].natureza_juridica)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].efr)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].efr)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].motivo_situacao)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].motivo_situacao)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].data_situacao)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].data_situacao)
+                                    </dd>
+
+
+                                </div>
+                                <div class="col-md-5">
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].situacao)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].situacao)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].capital_social)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].capital_social)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].data_situacao_especial)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].data_situacao_especial)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].ultima_atualizacao)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model[j].ultima_atualizacao)
+                                    </dd>
+                                </div>
+                            </div>
+                            <hr />
+                        </dl>
+
+
+                    </div>
+                </div>
+                <div class="tab-2">
+                    <label for="tab2-2+@Model[j].cnpj">Sócios e donos</label>
+                    <input id="tab2-2+@Model[j].cnpj" name="tabs-two+@Model[j].cnpj" type="radio">
+                    <div class="tab_cont">
+                        <h2>@Model[j].nome</h2>
+                        <h4>@Model[j].cnpj</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model[j].nome)
+                                    </dt>
+                                    <dd>
+                                        @for (int i = 0; i < Model[j].qsa.Count; i++)
+                                        {
+                                            @Html.DisplayFor(model => model[j].qsa[i].nome)
+                                            <hr style="margin-top: 2px;margin-bottom: 2px" />
+                                        }
+                                    </dd>
+                                </div>
+                                <div class="col-md-5">
+                                    <dt>
+                                        @Html.DisplayName("Cargo")
+                                    </dt>
+                                    <dd>
+                                        @for (int i = 0; i < Model[j].qsa.Count; i++)
+                                        {
+                                            @Html.DisplayFor(model => model[j].qsa[i].qual)
+                                            <hr style="margin-top: 2px;margin-bottom: 2px" />
+                                        }
+                                    </dd>
+                                </div>
+                            </div>
+                        </dl>
+
+
+                    </div>
+                </div>
+            </div>
+            <form asp-action="Create" method="post">
+
+                <input type="hidden" name="cnpj" value="@Model[j].cnpj" />
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <a asp-action="Index">Voltar</a>
+                    </div>
+                    <div class="col-md-5">
+                        <button class="btn btn-primary" type="submit">Salvar</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    }
+</div>
+

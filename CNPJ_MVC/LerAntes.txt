@@ -1,0 +1,5 @@
+﻿Configurar banco de dados -> appsettings.json
+Utilizar o Package Manager Console para criar as tabelas.
+
+Commands -> Add-Migration NomeDaMigrationDesejada.
+			Update-Database

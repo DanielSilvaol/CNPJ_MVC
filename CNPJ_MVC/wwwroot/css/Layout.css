@@ -1,0 +1,309 @@
+﻿.tag {
+    border-radius: 3px;
+    background: #b5aff9;
+    float: left;
+    margin: 3px;
+    padding: 4px;
+    font-size: 1em;
+    vertical-align: middle;
+    box-shadow: 0px 1px 4px #c6c6c6, 0px 2px 17px #d1d1d1;
+}
+
+    .tag a {
+        color: #000;
+        padding-right: 10px;
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-right: 5px;
+    }
+
+    .tag span {
+        padding-right: 10px;
+        padding-left: 0px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+.note {
+    position: fixed;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+
+.r-text-field {
+    --uiTextFieldPlaceholderColor: var(--textFieldPlaceholderColor);
+    font-family: inherit;
+    font-size: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 0;
+    border-style: solid;
+}
+
+    .r-text-field::-webkit-input-placeholder {
+        color: var(--uiTextFieldPlaceholderColor);
+    }
+
+    .r-text-field::-moz-placeholder {
+        opacity: 1;
+        color: var(--uiTextFieldPlaceholderColor);
+    }
+
+    .r-text-field:invalid {
+        outline: none;
+        box-shadow: none;
+    }
+
+.r-button {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+    .r-button::-moz-focus-inner,
+    .r-button[type="button"]::-moz-focus-inner,
+    .r-button[type="reset"]::-moz-focus-inner,
+    .r-button[type="submit"]::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+    }
+
+.a-field {
+    --uiaFieldHeight: var(--aFieldHeight);
+    --uiaFieldHintFinalCoordinate: var(--aFieldHintFinalCoordinate, var(--uiaFieldHeight));
+    --uiaFieldPaddingLeft: var(--aFieldPaddingLeft);
+    position: relative;
+    padding-top: calc(var(--uiaFieldHintFinalCoordinate) - var(--uiaFieldHeight));
+}
+
+.a-field__input {
+    box-sizing: border-box;
+    height: var(--uiaFieldHeight);
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: var(--uiaFieldPaddingLeft);
+}
+
+    .a-field__input::-webkit-input-placeholder {
+        opacity: 0;
+        transition: opacity .2s ease-out;
+    }
+
+    .a-field__input::-moz-placeholder {
+        opacity: 0;
+    }
+
+    .a-field__input:focus::-webkit-input-placeholder {
+        opacity: 1;
+        transition-delay: .2s;
+    }
+
+    .a-field__input:focus::-moz-placeholder {
+        opacity: 1;
+    }
+
+.a-field__label-wrap {
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--uiaFieldHeight);
+    pointer-events: none;
+    cursor: text;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.a-field__label {
+    position: absolute;
+    left: var(--uiaFieldPaddingLeft);
+    bottom: calc(50% - .5em);
+    line-height: 1;
+    pointer-events: none;
+}
+
+@supports (-webkit-appearance: none) {
+
+    .a-field__label {
+        transition: bottom .2s cubic-bezier(0.9,-0.15, 0.1, 1.15), opacity .2s ease-out;
+        will-change: bottom, opacity;
+    }
+}
+
+
+
+.a-field__input:not(:placeholder-shown) ~ .a-field__label-wrap .a-field__label {
+    opacity: 0;
+    bottom: 85%;
+}
+
+
+
+.a-field__input:focus ~ .a-field__label-wrap .a-field__label {
+    opacity: 1;
+    bottom: var(--uiaFieldHintFinalCoordinate);
+}
+
+.search {
+    --searchFieldHeight: 50px;
+    --searchButtonSize: var(--searchFieldHeight);
+    --textFieldPlaceholderColor: #fff;
+    --aFieldHeight: var(--searchFieldHeight);
+    --aFieldHintFinalCoordinate: calc(var(--searchFieldHeight) + 10px);
+    --aFieldPaddingLeft: 30px;
+    /*color: #fff;*/
+    position: relative;
+}
+
+.search__input {
+    width: 100%;
+    border-width: 3px;
+    border-color: currentColor;
+    border-radius: 25px;
+    background-color: transparent;
+    font-size: 18px;
+    color: currentColor;
+}
+
+    .search__input:focus {
+        outline: none;
+    }
+
+.search__hint {
+    font-size: 16px;
+}
+
+.search__button {
+    color: currentColor;
+}
+
+    .search__button:focus {
+        outline: none;
+    }
+
+.search__clear {
+    width: 1em;
+    height: 1em;
+    font-size: var(--searchButtonSize);
+    position: absolute;
+    bottom: 0;
+    display: none;
+}
+
+
+
+.search__input:not(:placeholder-shown) ~ .search__clear {
+    display: block;
+}
+
+
+.search__clear:focus ~ .a-field__label-wrap .a-field__label {
+    opacity: 1;
+    bottom: var(--aFieldHintFinalCoordinate);
+}
+
+.search__clear-label {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
+
+.search__icon {
+    fill: currentColor;
+    display: block;
+    box-sizing: border-box;
+    width: 1.5em;
+    height: 1.5em;
+    padding: .25em;
+    position: absolute;
+    top: calc(50% - .75em);
+    left: calc(50% - .75em);
+}
+
+.search__button:focus .search__icon {
+    box-shadow: 0 0 0 3px currentColor;
+}
+
+.search__icon-clear {
+    font-size: 18px;
+}
+
+
+.page {
+    width: 50%;
+    position: relative;
+    left: 26%;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+
+    .search__input {
+        padding-right: 50px;
+    }
+
+    .search__clear {
+        right: 10px;
+    }
+
+    .search__submit {
+        display: block;
+        width: 100%;
+        padding: 12px 15px;
+        background-color: #fff;
+        text-transform: uppercase;
+        color: #5f27cd;
+        border-radius: 25px;
+        margin-top: 25px;
+    }
+
+        .search__submit:focus {
+            box-shadow: 0 0 0 3px currentColor;
+            color: #422380;
+        }
+
+    .search__icon-search {
+        display: none;
+    }
+}
+
+@media (min-width: 641px) {
+
+    .search__input {
+        padding-right: 115px;
+    }
+
+    .search__clear {
+        right: var(--searchButtonSize);
+    }
+
+    .search__submit {
+        width: 1em;
+        height: 1em;
+        font-size: var(--searchButtonSize);
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+    }
+
+    .search__submit-label {
+        position: absolute;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+    }
+
+    .search__icon-search {
+        font-size: 22px;
+    }
+}

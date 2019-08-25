@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using CNPJ_MVC.Models;
 
 namespace CNPJ_MVC
 {
@@ -33,6 +35,9 @@ namespace CNPJ_MVC
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<CnpjContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("CnpjContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
