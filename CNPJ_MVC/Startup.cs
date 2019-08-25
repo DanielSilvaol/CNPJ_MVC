@@ -61,7 +61,7 @@ namespace CNPJ_MVC
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Empresas}/{action=Index}/{id?}");
             });
         }
     }

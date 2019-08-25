@@ -1,5 +1,5 @@
-﻿@model List<CNPJ_MVC.ViewModels.FormEmpresasViewModel>
-<h2>Empresas</h2>
+﻿@using Microsoft.EntityFrameworkCore.Internal
+@model List<CNPJ_MVC.ViewModels.FormEmpresasViewModel>
 
 <div class="page">
     <div class="page__demo">
@@ -38,7 +38,7 @@
 
 <div class='tagHere'></div>
 
-<div class="tabs">
+<div class="tabs" style="margin-top: 4%;">
 
     <div class="tabs__sidebar">
         @for (int i = 0; i < Model.Count; i++)
@@ -51,7 +51,7 @@
 
         <div class="tabs__content" data-tab="@j">
 
-            <div class="tabs">
+            <div class="tabs" style="border-bottom: none">
                 <div class="tab-2">
                     <label for="tab2-1">Informações</label>
                     <input id="tab2-1" name="tabs-two+@Model[j].cnpj" type="radio" checked="checked">
@@ -287,35 +287,29 @@
                         <h2>@Model[j].nome</h2>
                         <h4>@Model[j].cnpj</h4>
                         <hr />
-                        <dl class="dl-horizontal">
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model[j].nome)
-                                    </dt>
-                                    <dd>
-                                        @for (int i = 0; i < Model[j].qsa.Count; i++)
-                                        {
-                                            @Html.DisplayFor(model => model[j].qsa[i].nome)
-                                            <hr style="margin-top: 2px;margin-bottom: 2px" />
-                                        }
-                                    </dd>
-                                </div>
-                                <div class="col-md-5">
-                                    <dt>
-                                        @Html.DisplayName("Cargo")
-                                    </dt>
-                                    <dd>
-                                        @for (int i = 0; i < Model[j].qsa.Count; i++)
-                                        {
-                                            @Html.DisplayFor(model => model[j].qsa[i].qual)
-                                            <hr style="margin-top: 2px;margin-bottom: 2px" />
-                                        }
-                                    </dd>
-                                </div>
-                            </div>
-                        </dl>
-
+                        
+                        <div class="table-wrapper">
+                            <table class="fl-table">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Cargo</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for (int i = 0; i < Model[j].qsa.Count; i++)
+                                {
+                                    
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => model[j].qsa[i].nome)</td>
+                                        <td>@Html.DisplayFor(model => model[j].qsa[i].qual)</td>
+                                    </tr>
+                                }
+                                
+                                <tbody>
+                            </table>
+                        </div>
+                        
 
                     </div>
                 </div>
@@ -325,12 +319,15 @@
                 <input type="hidden" name="cnpj" value="@Model[j].cnpj" />
 
                 <div class="row">
-                    <div class="col-md-7">
-                        <a asp-action="Index">Voltar</a>
+                    <div class="col-md-12" style="margin-bottom: 20px">
+                        <button class="btn btn-primary" style="float: right; margin-right: 10px" type="submit">
+                            Salvar    <i class="fas fa-save"></i>
+                        </button>
+                        <a class="btn btn-info" style="float: right; margin-right: 5px" asp-action="Index">
+                            Voltar    <i class="fas fa-undo-alt"></i>
+                        </a>
                     </div>
-                    <div class="col-md-5">
-                        <button class="btn btn-primary" type="submit">Salvar</button>
-                    </div>
+                    
                 </div>
             </form>
 
